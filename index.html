@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DEDO Page</title>
+  <title>DEDOPAGE</title>
   <style>
     body {
       margin: 0;
@@ -74,16 +74,21 @@
 
     .music-player {
       position: absolute;
-      bottom: 30px;
-      left: 20px;
+      bottom: 15px;
+      left: 15px;
     }
 
     .play-button {
-      width: 50px;
-      height: 50px;
+      width: 24px;
+      height: 24px;
       background-color: yellow;
       clip-path: polygon(0 50%, 100% 0, 100% 100%);
       cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .play-button:hover {
+      transform: scale(1.2);
     }
 
     audio {
@@ -93,10 +98,12 @@
 </head>
 <body>
 
-  <div class="bee-boom">Bee💥</div>
-  <div class="username">DEDO</div>
+  <!-- DEDO Title -->
+  <div class="bee-boom">DEDO</div>
+  <div class="username">dedo92</div>
   <div class="user-id">(1557730119)</div>
 
+  <!-- Menu -->
   <div class="menu">
     <a href="gifs.html">Gifs</a>
     <a href="pstyle.html">Pstyle Gif</a>
@@ -107,7 +114,7 @@
   <!-- Music Player -->
   <div class="music-player">
     <div class="play-button" onclick="toggleMusic()"></div>
-    <audio id="audioPlayer" src="music.mp3" preload="auto"></audio>
+    <audio id="audioPlayer" src="audio/music.mp3" preload="auto"></audio>
   </div>
 
   <script>
