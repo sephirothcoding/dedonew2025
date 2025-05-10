@@ -20,13 +20,6 @@
       font-weight: bold;
       color: gold;
       text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8);
-      animation: boom 1.5s ease-out forwards;
-    }
-
-    @keyframes boom {
-      0% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { transform: scale(1); }
     }
 
     .username {
@@ -94,12 +87,43 @@
     audio {
       display: none;
     }
+
+    /* Animation for writing effect */
+    .writing-effect {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: write 5s steps(10, end) forwards;
+    }
+
+    @keyframes write {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* Letter animation */
+    .letter {
+      display: inline-block;
+      opacity: 0;
+      animation: fadeInLetter 0.5s forwards;
+    }
+
+    @keyframes fadeInLetter {
+      to { opacity: 1; }
+    }
   </style>
 </head>
 <body>
 
   <!-- DEDO Title -->
-  <div class="bee-boom">DEDO</div>
+  <div class="bee-boom">
+    <span class="writing-effect">
+      <span class="letter">D</span>
+      <span class="letter">E</span>
+      <span class="letter">D</span>
+      <span class="letter">O</span>
+    </span>
+  </div>
   <div class="username">dedo92</div>
   <div class="user-id">(1557730119)</div>
 
