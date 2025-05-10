@@ -6,33 +6,135 @@
   <title>DEDOPAGE</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
   <style>
-    /* TOATE stilurile CSS de mai sus (din răspunsul anterior) vin aici */
-    /* Dacă vrei, îți trimit tot CSS-ul compact și curat separat la cerere */
-
-    /* Ex: doar începutul */
     body {
+      margin: 0;
       background: linear-gradient(135deg, #000428, #004e92);
       font-family: 'Dancing Script', cursive;
-      color: skyblue;
+      color: white;
       text-align: center;
       overflow: hidden;
-      cursor: url('https://cdn.custom-cursor.com/db/12345/32/cursor.png'), auto;
     }
 
-    /* restul codului css urmează aici - vezi răspunsul anterior pentru detalii */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .bee-boom {
+      margin-top: 80px;
+      font-size: 80px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 15px skyblue, 0 0 30px deepskyblue;
+      animation: floaty 6s ease-in-out infinite;
+    }
+
+    .typing {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      animation: typing 6s steps(8, end) infinite, blink 0.75s step-end infinite;
+      border-right: 3px solid skyblue;
+    }
+
+    @keyframes typing {
+      0% { width: 0 }
+      40% { width: 8ch }
+      80% { width: 8ch }
+      100% { width: 0 }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: skyblue; }
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .username {
+      font-size: 28px;
+      margin-top: 10px;
+      color: skyblue;
+    }
+
+    .user-id {
+      font-size: 20px;
+      color: lightblue;
+      margin-bottom: 30px;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .menu a {
+      font-size: 26px;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      text-shadow: 0 0 10px skyblue;
+      padding: 12px 18px;
+      border: 2px solid skyblue;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+      animation: fadeIn 1.5s ease-in forwards;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+    }
+
+    .menu a:hover {
+      color: deepskyblue;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px skyblue;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .music-player {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+    }
+
+    .play-button {
+      width: 24px;
+      height: 24px;
+      background-color: skyblue;
+      clip-path: polygon(0 50%, 100% 0, 100% 100%);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .play-button:hover {
+      transform: scale(1.2);
+    }
+
+    audio {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Fundal aurora și particule -->
-  <div class="aurora"></div>
+  <!-- Particule fundal -->
   <div id="particles-js"></div>
 
-  <!-- Nume DEDO cu efecte -->
-  <div class="bee-boom text-3d floating breathing">
-    <span class="typing">DEDO</span>
+  <!-- Nume DEDO animat -->
+  <div class="bee-boom">
+    <span class="typing">D E D O</span>
   </div>
-
   <div class="username">dedo92</div>
   <div class="user-id">(1557730119)</div>
 
@@ -50,13 +152,12 @@
     <audio id="audioPlayer" src="audio/music.mp3" preload="auto"></audio>
   </div>
 
-  <!-- Particule.js -->
+  <!-- Particles.js script -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    /* Music toggle */
+    // Music control
     let isPlaying = false;
     const audio = document.getElementById('audioPlayer');
-
     function toggleMusic() {
       if (isPlaying) {
         audio.pause();
@@ -66,52 +167,49 @@
       isPlaying = !isPlaying;
     }
 
-    /* Configurare particule */
+    // Particule configurare
     particlesJS("particles-js", {
-      "particles": {
-        "number": {
-          "value": 80,
-          "density": { "enable": true, "value_area": 800 }
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 }},
+        color: { value: "#00bfff" },
+        shape: { type: "circle" },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: { enable: true, speed: 1, opacity_min: 0.1 }
         },
-        "color": { "value": "#00bfff" },
-        "shape": { "type": "circle" },
-        "opacity": {
-          "value": 0.5,
-          "random": true,
-          "anim": { "enable": true, "speed": 1, "opacity_min": 0.1 }
+        size: {
+          value: 3,
+          random: true
         },
-        "size": {
-          "value": 3,
-          "random": true
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#00bfff",
+          opacity: 0.4,
+          width: 1
         },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#00bfff",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 2,
-          "direction": "none",
-          "random": false,
-          "straight": false,
-          "out_mode": "out"
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out"
         }
       },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": true, "mode": "push" }
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
         },
-        "modes": {
-          "repulse": { "distance": 100, "duration": 0.4 },
-          "push": { "particles_nb": 4 }
+        modes: {
+          repulse: { distance: 100, duration: 0.4 },
+          push: { particles_nb: 4 }
         }
       },
-      "retina_detect": true
+      retina_detect: true
     });
   </script>
 
