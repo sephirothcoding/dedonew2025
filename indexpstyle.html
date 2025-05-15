@@ -12,9 +12,8 @@
       font-family: 'Dancing Script', cursive;
       color: white;
       text-align: center;
-      overflow: hidden;
+      overflow-y: auto;
     }
-
     h1 {
       margin-top: 80px;
       font-size: 80px;
@@ -23,7 +22,6 @@
       text-shadow: 0 0 15px skyblue, 0 0 30px deepskyblue;
       animation: floaty 6s ease-in-out infinite;
     }
-
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -31,7 +29,6 @@
       gap: 30px;
       margin: 40px 20px 0 20px;
     }
-
     .gallery-item {
       display: flex;
       flex-direction: column;
@@ -44,33 +41,28 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
       width: 400px;
     }
-
     .gallery-item:hover {
       transform: scale(1.1);
       box-shadow: 0 0 30px deepskyblue;
       background-color: rgba(255, 255, 255, 0.1);
     }
-
     .gallery-item img {
-      width: 380px; /* Modified width to 380px */
-      height: 100px; /* Modified height to 100px */
+      width: 380px;
+      height: 100px;
       border-radius: 10px;
       transition: opacity 0.5s ease;
-      margin-bottom: 6px;
     }
-
     .gallery-item img:hover {
       opacity: 0.8;
     }
-
     .name {
       margin-top: 10px;
       font-size: 28px;
       font-weight: bold;
       color: skyblue;
       text-shadow: 0 0 10px skyblue;
+      word-break: break-word;
     }
-
     @keyframes floaty {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
@@ -78,49 +70,56 @@
   </style>
 </head>
 <body>
-
   <h1>Galerie Imagini Pstyle Gif</h1>
   <div id="pstyle-gallery" class="gallery"></div>
 
   <script>
-    const totalImages = 5; // Number of images
     const gallery = document.getElementById('pstyle-gallery');
-    gallery.innerHTML = ''; // Clear gallery
 
-    for (let i = 1; i <= totalImages; i++) {
-      // Container for PNG image
-      const pngItem = document.createElement('div');
-      pngItem.classList.add('gallery-item');
+    // Lista combinata cu nume posibile (poți ajusta numărul după nevoie)
+    const imageNames = [];
+    const maxNumber = 5; // câte imagini pstyleX să încerci
+    const extensions = ['.png', '.gif'];
 
-      const pngImg = document.createElement('img');
-      pngImg.src = `pstyle/pstyle${i}.png`;
-      pngImg.alt = `Pstyle ${i} PNG`;
-
-      const pngName = document.createElement('div');
-      pngName.classList.add('name');
-      pngName.textContent = `Pstyle ${i} PNG`;
-
-      pngItem.appendChild(pngImg);
-      pngItem.appendChild(pngName);
-      gallery.appendChild(pngItem);
-
-      // Container for GIF image
-      const gifItem = document.createElement('div');
-      gifItem.classList.add('gallery-item');
-
-      const gifImg = document.createElement('img');
-      gifImg.src = `pstyle/pstyle${i}.gif`;
-      gifImg.alt = `Pstyle ${i} GIF`;
-
-      const gifName = document.createElement('div');
-      gifName.classList.add('name');
-      gifName.textContent = `Pstyle ${i} GIF`;
-
-      gifItem.appendChild(gifImg);
-      gifItem.appendChild(gifName);
-      gallery.appendChild(gifItem);
+    for(let i = 1; i <= maxNumber; i++) {
+      extensions.forEach(ext => {
+        imageNames.push(`pstyle${i}${ext}`);
+      });
     }
-  </script>
 
+    function loadImages() {
+      gallery.innerHTML = '';
+
+      imageNames.forEach(imageName => {
+        const img = new Image();
+        img.src = `pstyle/${imageName}`;
+        img.alt = imageName;
+
+        img.onload = () => {
+          const imgItem = document.createElement('div');
+          imgItem.classList.add('gallery-item');
+
+          const imgElement = document.createElement('img');
+          imgElement.src = img.src;
+          imgElement.alt = img.alt;
+
+          const name = document.createElement('div');
+          name.classList.add('name');
+          name.textContent = imageName.replace(/\.(png|gif)$/, '');
+
+          imgItem.appendChild(imgElement);
+          imgItem.appendChild(name);
+          gallery.appendChild(imgItem);
+        };
+
+        img.onerror = () => {
+          // Fișierul nu există, nu afișăm nimic
+          // console.log(`Fișier lipsă: ${imageName}`);
+        };
+      });
+    }
+
+    loadImages();
+  </script>
 </body>
 </html>
