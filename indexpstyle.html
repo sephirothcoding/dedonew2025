@@ -12,7 +12,7 @@
       font-family: 'Dancing Script', cursive;
       color: white;
       text-align: center;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     h1 {
@@ -29,7 +29,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      margin: 40px 20px 60px 20px;
+      margin: 40px 20px 0 20px;
     }
 
     .gallery-item {
@@ -37,27 +37,26 @@
       flex-direction: column;
       align-items: center;
       border: 2px solid skyblue;
-      padding: 20px;
+      padding: 12px;
       background-color: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
       box-shadow: 0 0 15px skyblue;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
-      width: 420px;
+      width: 400px;
     }
 
     .gallery-item:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
       box-shadow: 0 0 30px deepskyblue;
       background-color: rgba(255, 255, 255, 0.1);
     }
 
     .gallery-item img {
-      width: 380px;
-      height: auto;
+      width: 380px; /* Modified width to 380px */
+      height: 100px; /* Modified height to 100px */
       border-radius: 10px;
-      margin-top: 12px;
       transition: opacity 0.5s ease;
-      cursor: pointer;
+      margin-bottom: 6px;
     }
 
     .gallery-item img:hover {
@@ -65,8 +64,8 @@
     }
 
     .name {
-      margin-top: 8px;
-      font-size: 22px;
+      margin-top: 10px;
+      font-size: 28px;
       font-weight: bold;
       color: skyblue;
       text-shadow: 0 0 10px skyblue;
@@ -84,41 +83,42 @@
   <div id="pstyle-gallery" class="gallery"></div>
 
   <script>
-    const totalImages = 5;
+    const totalImages = 5; // Number of images
     const gallery = document.getElementById('pstyle-gallery');
-    gallery.innerHTML = '';
+    gallery.innerHTML = ''; // Clear gallery
 
     for (let i = 1; i <= totalImages; i++) {
-      const imgItem = document.createElement('div');
-      imgItem.classList.add('gallery-item');
+      // Container for PNG image
+      const pngItem = document.createElement('div');
+      pngItem.classList.add('gallery-item');
 
-      // PNG Image
-      const imgPng = document.createElement('img');
-      imgPng.src = `pstyle/pstyle${i}.png`;
-      imgPng.alt = `Pstyle ${i} PNG`;
+      const pngImg = document.createElement('img');
+      pngImg.src = `pstyle/pstyle${i}.png`;
+      pngImg.alt = `Pstyle ${i} PNG`;
 
-      const namePng = document.createElement('div');
-      namePng.classList.add('name');
-      namePng.textContent = `Pstyle ${i} PNG`;
+      const pngName = document.createElement('div');
+      pngName.classList.add('name');
+      pngName.textContent = `Pstyle ${i} PNG`;
 
-      // GIF Image
-      const imgGif = document.createElement('img');
-      imgGif.src = `pstyle/pstyle${i}.gif`;
-      imgGif.alt = `Pstyle ${i} GIF`;
+      pngItem.appendChild(pngImg);
+      pngItem.appendChild(pngName);
+      gallery.appendChild(pngItem);
 
-      const nameGif = document.createElement('div');
-      nameGif.classList.add('name');
-      nameGif.textContent = `Pstyle ${i} GIF`;
+      // Container for GIF image
+      const gifItem = document.createElement('div');
+      gifItem.classList.add('gallery-item');
 
-      // Append PNG image and name
-      imgItem.appendChild(imgPng);
-      imgItem.appendChild(namePng);
+      const gifImg = document.createElement('img');
+      gifImg.src = `pstyle/pstyle${i}.gif`;
+      gifImg.alt = `Pstyle ${i} GIF`;
 
-      // Append GIF image and name
-      imgItem.appendChild(imgGif);
-      imgItem.appendChild(nameGif);
+      const gifName = document.createElement('div');
+      gifName.classList.add('name');
+      gifName.textContent = `Pstyle ${i} GIF`;
 
-      gallery.appendChild(imgItem);
+      gifItem.appendChild(gifImg);
+      gifItem.appendChild(gifName);
+      gallery.appendChild(gifItem);
     }
   </script>
 
