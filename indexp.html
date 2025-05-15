@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Pachetelor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+           background-color: #0c1575; /* Fundal albastru deschis */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+            color: #fff; /* Text alb pentru contrast */
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #1E90FF; /* Albastru luminos */
+            text-shadow: 0 0 10px rgba(30, 144, 255, 0.7); /* Albastru luminos Glow */
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #1E90FF, #00008B); /* Albastru și albastru închis */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 1.5s ease-in-out infinite;
+        }
+
+        h2 {
+            color: #1E90FF; /* Albastru luminos */
+            font-size: 2em;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .package {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #00008B; /* Albastru închis */
+            padding: 10px;
+            background-color: rgba(0, 0, 128, 0.8); /* Albastru semi-transparent */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.7); /* Albastru luminos Glow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 40px;
+            width: 500px; /* Mărim lățimea containerului */
+            max-width: 100%;
+            box-sizing: border-box;
+            height: auto;
+        }
+
+        .package:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(30, 144, 255, 1); /* Glow mai puternic */
+        }
+
+        .package img {
+            border-radius: 10px;
+            object-fit: contain; /* Impiedică deformarea imaginii */
+            width: 100%;
+            height: auto;
+        }
+
+        .name {
+            margin-top: 10px;
+            color: #1E90FF; /* Albastru luminos */
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 0 0 5px rgba(30, 144, 255, 0.7); /* Glow albastru luminos */
+        }
+
+        .price {
+            margin-top: 10px;
+            color: #1E90FF; /* Albastru luminos */
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px rgba(30, 144, 255, 0.7); /* Glow albastru luminos */
+        }
+
+        .package-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+        .package-images img {
+            object-fit: contain; /* Asigură că imaginea nu se deformează */
+            height: auto;
+        }
+
+        .pcback {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Imagini gif și pstylegif pentru dimensiuni corecte */
+        .gif-img {
+            width: 300px; /* Dimensiune fixă pentru gif */
+            height: 300px;
+        }
+
+        .pstylegif-img {
+            width: 300px; /* Dimensiune fixă pentru pstylegif */
+            height: 100px; /* Înălțimea fixă pentru pstylegif */
+        }
+
+        .pcback-img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px; /* Spațiu vertical între pstylegif și pcbackgif */
+        }
+
+        /* Responsivitate */
+        .package-images img {
+            max-width: 100%; 
+            height: auto;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(30, 144, 255, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(30, 144, 255, 1); }
+            100% { text-shadow: 0 0 5px rgba(30, 144, 255, 0.5); }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Pagina Pachetelor</h1>
+
+<div id="packages-container"></div>
+
+<script>
+    async function fetchPackageFiles() {
+        const repoOwner = 'sephirothcoding';  // Numele de utilizator GitHub
+        const repoName = 'dedo';              // Numele repository-ului
+        const packageFolder = 'pachete';      // Folderul cu fișierele din repository
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${packageFolder}`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+
+            // Filtrăm doar fișierele care au extensia .gif
+            return data.filter(item => item.name.endsWith('.gif')).map(file => file.name);
+        } catch (error) {
+            console.error('Failed to fetch files:', error);
+            return [];
+        }
+    }
+
+    function groupFilesByPackage(files) {
+        const packages = {};
+
+        files.forEach(file => {
+            const match = file.match(/(gif|pcbackgif|pstylegif)(\d+)/);
+            if (match) {
+                const type = match[1];  // gif, pcbackgif, pstylegif
+                const number = match[2];  // Number of the package
+                if (!packages[number]) {
+                    packages[number] = {};
+                }
+                packages[number][type] = `https://raw.githubusercontent.com/sephirothcoding/dedo/main/pachete/${file}`;
+            }
+        });
+
+        // Verifică și returnează doar pachetele care conțin cel puțin un fișier
+        return Object.fromEntries(Object.entries(packages).filter(([key, value]) => 
+            value.gif || value.pcbackgif || value.pstylegif
+        ));
+    }
+
+    function createPackageHTML(packageNumber, files) {
+        const packageDiv = document.createElement('div');
+        packageDiv.classList.add('package');
+
+        // Adaugă imaginile (gif și pstylegif pe aceeași linie)
+        const imagesDiv = document.createElement('div');
+        imagesDiv.classList.add('package-images');
+
+        if (files.gif) {
+            const gifImg = document.createElement('img');
+            gifImg.src = files.gif;
+            gifImg.alt = `Gif ${packageNumber}`;
+            gifImg.classList.add('gif-img');
+            imagesDiv.appendChild(gifImg);
+        }
+
+        if (files.pstylegif) {
+            const pstyleGifImg = document.createElement('img');
+            pstyleGifImg.src = files.pstylegif;
+            pstyleGifImg.alt = `PStyle Gif ${packageNumber}`;
+            pstyleGifImg.classList.add('pstylegif-img');
+            imagesDiv.appendChild(pstyleGifImg);
+        }
+
+        // Adaugă PCBackGif sub celelalte imagini
+        const pcBackDiv = document.createElement('div');
+        if (files.pcbackgif) {
+            const pcBackImg = document.createElement('img');
+            pcBackImg.src = files.pcbackgif;
+            pcBackImg.alt = `PCBack Gif ${packageNumber}`;
+            pcBackImg.classList.add('pcback-img');
+            pcBackDiv.appendChild(pcBackImg);
+        }
+
+        // Adaugă numele și prețul
+        const nameDiv = document.createElement('div');
+        nameDiv.classList.add('name');
+        nameDiv.textContent = `Pachet ${packageNumber}`;
+
+        const priceDiv = document.createElement('div');
+        priceDiv.classList.add('price');
+        priceDiv.textContent = `Preț: ${packageNumber * 1000} xats`;
+
+        // Așează totul în pachet
+        packageDiv.appendChild(imagesDiv);
+        packageDiv.appendChild(pcBackDiv);
+        packageDiv.appendChild(nameDiv);
+        packageDiv.appendChild(priceDiv);
+
+        return packageDiv;
+    }
+
+    async function displayPackages() {
+        const files = await fetchPackageFiles();
+        const groupedFiles = groupFilesByPackage(files);
+        const packagesContainer = document.getElementById('packages-container');
+
+        // Golește containerul înainte de a adăuga pachetele
+        packagesContainer.innerHTML = '';
+
+        // Adaugă pachetele
+        Object.keys(groupedFiles).forEach(packageNumber => {
+            const packageHTML = createPackageHTML(packageNumber, groupedFiles[packageNumber]);
+            packagesContainer.appendChild(packageHTML);
+        });
+    }
+
+    // Încarcă și afișează pachetele
+    displayPackages();
+</script>
+
+</body>
+</html>

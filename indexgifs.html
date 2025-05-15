@@ -1,0 +1,227 @@
+
+<!-- Copyright Notice
+    // All images and code contained in this project are the sole property of Seph (1538769249).
+    // They may not be used, copied, or redistributed in any form unless purchased directly from Seph (1538769249).
+    // Usage is strictly limited to xat.com and requires the explicit approval of the owner.
+    // Unauthorized use is prohibited and subject to legal action.
+
+    // Notificare de Copyright
+    // Toate imaginile și codul conținut în acest proiect sunt proprietatea exclusivă a lui Seph (1538769249).
+    // Acestea nu pot fi utilizate, copiate sau redistribuite sub nicio formă decât dacă sunt achiziționate direct de la Seph (1538769249).
+    // Utilizarea este strict limitată la xat.com și necesită aprobarea explicită a proprietarului.
+    // Utilizarea neautorizată este interzisă și se supune acțiunilor legale.
+
+    // Aviso de Direitos Autorais
+    // Todas as imagens e códigos contidos neste projeto são propriedade exclusiva de Seph (1538769249).
+    // Eles não podem ser usados, copiados ou redistribuídos de nenhuma forma, a menos que sejam comprados diretamente de Seph (1538769249).
+    // O uso é estritamente limitado ao xat.com e requer a aprovação explícita do proprietário.
+    // O uso não autorizado é proibido e está sujeito a ação legal.
+
+    // Aviso de Derechos de Autor
+    // Todas las imágenes y el código contenidos en este proyecto son propiedad exclusiva de Seph (1538769249).
+    // No pueden ser utilizados, copiados o redistribuidos de ninguna forma a menos que se compren directamente a Seph (1538769249).
+    // El uso está estrictamente limitado a xat.com y requiere la aprobación explícita del propietario.
+    // El uso no autorizado está prohibido y está sujeto a acciones legales.
+
+    // Avviso di Copyright
+    // Tutte le immagini e il codice contenuti in questo progetto sono di proprietà esclusiva di Seph (1538769249).
+    // Non possono essere utilizzati, copiati o ridistribuiti in alcuna forma a meno che non siano acquistati direttamente da Seph (1538769249).
+    // L'uso è strettamente limitato a xat.com e richiede l'approvazione esplicita del proprietario.
+    // L'uso non autorizzato è proibito ed è soggetto ad azioni legali.
+
+    // Telif Hakkı Bildirimi
+    // Bu projedeki tüm resimler ve kodlar Seph'e (1538769249) aittir.
+    // Seph'ten (1538769249) doğrudan satın alınmadıkça hiçbir şekilde kullanılamaz, kopyalanamaz veya dağıtılamaz.
+    // Kullanım, yalnızca xat.com ile sınırlıdır ve sahibin açık onayını gerektirir.
+    // İzinsiz kullanım yasaktır ve yasal işlemlere tabidir. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie GIF-uri</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0c1575; /* Fundal albastru deschis */
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #FF6347; /* Red */
+            text-shadow: 0 0 10px rgba(255, 99, 71, 0.7); /* Red Glow */
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #FF6347, #8B0000); /* Red Shades */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlow 1.5s ease-in-out infinite;
+        }
+
+        h2 {
+            color: #FF6347; /* Red */
+            font-size: 2em;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px;
+        }
+
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #000000; /* Black */
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.8); /* Black */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7); /* Red Glow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 1); /* Stronger Red Glow */
+        }
+
+        .gallery-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            transition: opacity 0.5s ease;
+        }
+
+        .gallery-item img:hover {
+            opacity: 0.8;
+        }
+
+        .name {
+            margin-top: 5px;
+            color: #FF6347; /* Red */
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 0 0 5px rgba(255, 99, 71, 0.7); /* Red Glow */
+        }
+
+        .price {
+            margin-top: 10px;
+            color: #FF6347; /* Red */
+            font-weight: bold;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px rgba(255, 99, 71, 0.7); /* Red Glow */
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(255, 99, 71, 0.5); }
+            50% { text-shadow: 0 0 15px rgba(255, 99, 71, 1); }
+            100% { text-shadow: 0 0 5px rgba(255, 99, 71, 0.5); }
+        }
+    </style>
+</head>
+<body>
+
+<h1>Galerie GIF-uri</h1>
+
+<h2>Blufftitler Gifs</h2>
+<div id="bt-gallery" class="gallery"></div>
+
+<h2>After Effects Gifs</h2>
+<div id="af-gallery" class="gallery"></div>
+
+<script>
+    async function fetchGifs() {
+        const repoOwner = 'sephirothcoding';  // Numele de utilizator GitHub
+        const repoName = 'STORE';             // Numele repository-ului
+        const gifFolder = 'gifs';             // Folderul cu GIF-uri din repository
+        const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${gifFolder}`;
+        
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const data = await response.json();
+
+            // Filtrăm doar fișierele GIF
+            return data
+                .filter(item => item.name.endsWith('.gif'))
+                .map(file => file.name);
+        } catch (error) {
+            console.error('Failed to fetch GIFs:', error);
+            return [];
+        }
+    }
+
+    function extractNumber(fileName) {
+        const match = fileName.match(/\d+/);  // Extrage numărul din numele fișierului
+        return match ? parseInt(match[0], 10) : 0;
+    }
+
+    function categorizeAndSortGifs(gifNames) {
+        const btGifs = gifNames
+            .filter(name => name.startsWith('Bt'))
+            .sort((a, b) => extractNumber(b) - extractNumber(a));  // Sortare descrescătoare
+        const afGifs = gifNames
+            .filter(name => name.startsWith('Af'))
+            .sort((a, b) => extractNumber(b) - extractNumber(a));  // Sortare descrescătoare
+        return { btGifs, afGifs };
+    }
+
+    function createGallery(gifNames, galleryId, price, prefix) {
+        const gallery = document.getElementById(galleryId);
+        gallery.innerHTML = ''; // Golim galeria
+
+        gifNames.forEach((gifName, index) => {
+            const gifItem = document.createElement('div');
+            gifItem.classList.add('gallery-item');
+
+            // Încarcă imaginea GIF
+            const img = document.createElement('img');
+            img.src = `https://raw.githubusercontent.com/sephirothcoding/STORE/main/gifs/${gifName}`;
+            img.alt = gifName;
+
+            // Afișează numele GIF-ului
+            const name = document.createElement('div');
+            name.classList.add('name');
+            name.textContent = `${prefix} (${extractNumber(gifName)})`;  // Folosim numărul corect
+
+            // Adaugă prețul sub GIF
+            const priceDiv = document.createElement('div');
+            priceDiv.classList.add('price');
+            priceDiv.textContent = `Price: ${price} xats`;
+
+            // Afișăm imaginea, numele și prețul
+            gifItem.appendChild(img);
+            gifItem.appendChild(name);
+            gifItem.appendChild(priceDiv);
+            gallery.appendChild(gifItem);
+        });
+    }
+
+    async function loadGifs() {
+        const gifNames = await fetchGifs();
+        const { btGifs, afGifs } = categorizeAndSortGifs(gifNames);
+
+        createGallery(btGifs, 'bt-gallery', 300, 'Bt');
+        createGallery(afGifs, 'af-gallery', 500, 'Af');
+    }
+
+    loadGifs();
+</script>
+
+</body>
+</html>
+
