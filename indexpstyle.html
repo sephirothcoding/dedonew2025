@@ -12,7 +12,7 @@
       font-family: 'Dancing Script', cursive;
       color: white;
       text-align: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     h1 {
@@ -29,7 +29,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      margin: 40px 20px 0 20px;
+      margin: 40px 20px 60px 20px;
     }
 
     .gallery-item {
@@ -37,25 +37,27 @@
       flex-direction: column;
       align-items: center;
       border: 2px solid skyblue;
-      padding: 12px;
+      padding: 20px;
       background-color: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
       box-shadow: 0 0 15px skyblue;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
-      width: 400px;
+      width: 420px;
     }
 
     .gallery-item:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       box-shadow: 0 0 30px deepskyblue;
       background-color: rgba(255, 255, 255, 0.1);
     }
 
     .gallery-item img {
-      width: 380px; /* Modified width to 380px */
-      height: 100px; /* Modified height to 100px */
+      width: 380px;
+      height: auto;
       border-radius: 10px;
+      margin-top: 12px;
       transition: opacity 0.5s ease;
+      cursor: pointer;
     }
 
     .gallery-item img:hover {
@@ -63,8 +65,8 @@
     }
 
     .name {
-      margin-top: 10px;
-      font-size: 28px;
+      margin-top: 8px;
+      font-size: 22px;
       font-weight: bold;
       color: skyblue;
       text-shadow: 0 0 10px skyblue;
@@ -82,38 +84,42 @@
   <div id="pstyle-gallery" class="gallery"></div>
 
   <script>
-    // Repository info updated
-    const repoOwner = "sephirothcoding";
-    const repoName = "dedonew2025";
+    const totalImages = 5;
+    const gallery = document.getElementById('pstyle-gallery');
+    gallery.innerHTML = '';
 
-    function loadImages() {
-      const totalImages = 5; // Number of images
-      const gallery = document.getElementById('pstyle-gallery');
-      gallery.innerHTML = ''; // Clear the gallery
+    for (let i = 1; i <= totalImages; i++) {
+      const imgItem = document.createElement('div');
+      imgItem.classList.add('gallery-item');
 
-      for (let i = 1; i <= totalImages; i++) {
-        const imgItem = document.createElement('div');
-        imgItem.classList.add('gallery-item');
+      // PNG Image
+      const imgPng = document.createElement('img');
+      imgPng.src = `pstyle/pstyle${i}.png`;
+      imgPng.alt = `Pstyle ${i} PNG`;
 
-        // Create the img element
-        const img = document.createElement('img');
-        img.src = `pstyle/pstyle${i}.png`; // Images are named pstyle1, pstyle2, etc.
-        img.src = `pstyle/pstyle${i}.gif`; // Images are named pstyle1, pstyle2, etc.
-        img.alt = `Pstyle ${i}`;
+      const namePng = document.createElement('div');
+      namePng.classList.add('name');
+      namePng.textContent = `Pstyle ${i} PNG`;
 
-        // Display image name
-        const name = document.createElement('div');
-        name.classList.add('name');
-        name.textContent = `Pstyle ${i}`;
+      // GIF Image
+      const imgGif = document.createElement('img');
+      imgGif.src = `pstyle/pstyle${i}.gif`;
+      imgGif.alt = `Pstyle ${i} GIF`;
 
-        // Append image and name to the gallery item
-        imgItem.appendChild(img);
-        imgItem.appendChild(name);
-        gallery.appendChild(imgItem);
-      }
+      const nameGif = document.createElement('div');
+      nameGif.classList.add('name');
+      nameGif.textContent = `Pstyle ${i} GIF`;
+
+      // Append PNG image and name
+      imgItem.appendChild(imgPng);
+      imgItem.appendChild(namePng);
+
+      // Append GIF image and name
+      imgItem.appendChild(imgGif);
+      imgItem.appendChild(nameGif);
+
+      gallery.appendChild(imgItem);
     }
-
-    loadImages();
   </script>
 
 </body>
