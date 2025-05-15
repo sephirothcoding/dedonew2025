@@ -1,126 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galerie Pstyle</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #0c1575; /* Fundal albastru deschis */
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            min-height: 100vh;
-            overflow-y: auto;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galerie Imagini Pstyle Gif</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #000428, #004e92);
+      font-family: 'Dancing Script', cursive;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
 
-        h1 {
-            margin-top: 20px;
-            color: #FF6347; /* Red */
-            text-shadow: 0 0 10px rgba(255, 99, 71, 0.7); /* Red Glow */
-            font-size: 3em;
-            font-weight: bold;
-            background: linear-gradient(135deg, #FF6347, #8B0000); /* Red Shades */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGlow 1.5s ease-in-out infinite;
-        }
+    h1 {
+      margin-top: 80px;
+      font-size: 80px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 15px skyblue, 0 0 30px deepskyblue;
+      animation: floaty 6s ease-in-out infinite;
+    }
 
-        h2 {
-            color: #FF6347; /* Red */
-            font-size: 2em;
-            text-align: center;
-            margin-top: 40px;
-        }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 20px 0 20px;
+    }
 
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px;
-        }
+    .gallery-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid skyblue;
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 0 15px skyblue;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+      width: 400px;
+    }
 
-        .gallery-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border: 2px solid #000000; /* Black */
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.8); /* Black */
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7); /* Red Glow */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .gallery-item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px deepskyblue;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
 
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 0, 0, 1); /* Stronger Red Glow */
-        }
+    .gallery-item img {
+      width: 380px;
+      height: 100px;
+      border-radius: 10px;
+      transition: opacity 0.5s ease;
+    }
 
-        .gallery-item img {
-            width: 380px;
-            height: 100px;
-            border-radius: 10px;
-            transition: opacity 0.5s ease;
-        }
+    .gallery-item img:hover {
+      opacity: 0.8;
+    }
 
-        .gallery-item img:hover {
-            opacity: 0.8;
-        }
+    .name {
+      margin-top: 10px;
+      font-size: 28px;
+      font-weight: bold;
+      color: skyblue;
+      text-shadow: 0 0 10px skyblue;
+    }
 
-        .name {
-            margin-top: 5px;
-            color: #FF6347; /* Red */
-            font-weight: bold;
-            font-size: 1.1em;
-            text-shadow: 0 0 5px rgba(255, 99, 71, 0.7); /* Red Glow */
-        }
-
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 5px rgba(255, 99, 71, 0.5); }
-            50% { text-shadow: 0 0 15px rgba(255, 99, 71, 1); }
-            100% { text-shadow: 0 0 5px rgba(255, 99, 71, 0.5); }
-        }
-    </style>
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
 </head>
 <body>
 
-<h1>Galerie Imagini Pstyle Gif</h1>
-<div id="pstyle-gallery" class="gallery"></div>
+  <h1>Galerie Imagini Pstyle Gif</h1>
+  <div id="pstyle-gallery" class="gallery"></div>
 
-<script>
+  <script>
+    // Repository info updated
+    const repoOwner = "dedo92";
+    const repoName = "dedopage";
+
     function loadImages() {
-        const totalImages = 5; // Number of images
-        const gallery = document.getElementById('pstyle-gallery');
-        gallery.innerHTML = ''; // Clear the gallery
+      const totalImages = 5; // Number of images
+      const gallery = document.getElementById('pstyle-gallery');
+      gallery.innerHTML = ''; // Clear the gallery
 
-        for (let i = 1; i <= totalImages; i++) {
-            const imgItem = document.createElement('div');
-            imgItem.classList.add('gallery-item');
+      for (let i = 1; i <= totalImages; i++) {
+        const imgItem = document.createElement('div');
+        imgItem.classList.add('gallery-item');
 
-            // Create the img element
-            const img = document.createElement('img');
-            img.src = `pstyle/pstyle${i}.png`; // Images are named pstyle1, pstyle2, etc.
-            img.alt = `Pstyle ${i}`;
+        // Create the img element
+        const img = document.createElement('img');
+        img.src = `pstyle/pstyle${i}.png`; // Images are named pstyle1, pstyle2, etc.
+        img.alt = `Pstyle ${i}`;
 
-            // Display image name
-            const name = document.createElement('div');
-            name.classList.add('name');
-            name.textContent = `Pstyle ${i}`;
+        // Display image name
+        const name = document.createElement('div');
+        name.classList.add('name');
+        name.textContent = `Pstyle ${i}`;
 
-            // Append image and name to the gallery item
-            imgItem.appendChild(img);
-            imgItem.appendChild(name);
-            gallery.appendChild(imgItem);
-        }
+        // Append image and name to the gallery item
+        imgItem.appendChild(img);
+        imgItem.appendChild(name);
+        gallery.appendChild(imgItem);
+      }
     }
 
     loadImages();
-</script>
+  </script>
 
 </body>
 </html>
