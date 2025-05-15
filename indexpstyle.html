@@ -55,7 +55,7 @@
     .gallery-item img:hover {
       opacity: 0.8;
     }
-    .name {
+    .name, .price {
       margin-top: 10px;
       font-size: 28px;
       font-weight: bold;
@@ -76,16 +76,15 @@
   <script>
     const gallery = document.getElementById('pstyle-gallery');
 
-    // Lista combinata cu nume posibile (poți ajusta numărul după nevoie)
-    const imageNames = [];
-    const maxNumber = 5; // câte imagini pstyleX să încerci
-    const extensions = ['.png', '.gif'];
-
-    for(let i = 1; i <= maxNumber; i++) {
-      extensions.forEach(ext => {
-        imageNames.push(`pstyle${i}${ext}`);
-      });
-    }
+    // Lista cu numele exacte ale fișierelor din folderul pstyle
+    // Adaugă aici toate imaginile pe care le-ai încărcat, cu extensie completă
+    const imageNames = [
+      'pstyle1.png',
+      'pstyle2.png',
+      'pstylegif1.gif',
+      'pstylegif2.gif',
+      // adaugă alte fișiere dacă ai mai multe...
+    ];
 
     function loadImages() {
       gallery.innerHTML = '';
@@ -107,14 +106,22 @@
           name.classList.add('name');
           name.textContent = imageName.replace(/\.(png|gif)$/, '');
 
+          const price = document.createElement('div');
+          price.classList.add('price');
+          if (imageName.endsWith('.png')) {
+            price.textContent = 'Price: 600 xats';
+          } else if (imageName.endsWith('.gif')) {
+            price.textContent = 'Price: 1500 xats';
+          }
+
           imgItem.appendChild(imgElement);
           imgItem.appendChild(name);
+          imgItem.appendChild(price);
           gallery.appendChild(imgItem);
         };
 
         img.onerror = () => {
-          // Fișierul nu există, nu afișăm nimic
-          // console.log(`Fișier lipsă: ${imageName}`);
+          console.log(`File not found or failed to load: ${imageName}`);
         };
       });
     }
