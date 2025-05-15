@@ -32,7 +32,7 @@
       box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
       padding: 20px;
       margin: 30px auto;
-      max-width: 550px;
+      max-width: 740px; /* ajustat pentru a cuprinde pcback */
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
@@ -152,7 +152,7 @@
 <script>
   async function fetchPackageFiles() {
     const repoOwner = 'sephirothcoding';
-    const repoName = 'dedonew2025';
+    const repoName = 'dedo';
     const packageFolder = 'pachete';
     const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${packageFolder}`;
 
