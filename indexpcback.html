@@ -1,12 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DEDOPAGE - Galerie PcBack</title>
+  <title>Galerie Imagini PcBack</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
   <style>
-    /* Stil general body & font */
     body {
       margin: 0;
       background: linear-gradient(135deg, #000428, #004e92);
@@ -15,64 +15,50 @@
       text-align: center;
       overflow-y: auto;
       min-height: 100vh;
-      padding-bottom: 50px;
+      padding-bottom: 40px;
     }
 
-    /* Particule fundal */
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    /* Titlu animat */
     h1 {
-      margin: 60px 0 20px 0;
-      font-size: 80px;
+      margin-top: 20px;
+      font-size: 3em;
       font-weight: bold;
       color: white;
       text-shadow: 0 0 15px skyblue, 0 0 30px deepskyblue;
       animation: floaty 6s ease-in-out infinite;
     }
 
-    /* Galerie stilizata similar meniului */
     .gallery {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      padding: 0 20px;
-      max-width: 1200px;
-      margin: 0 auto 40px auto;
+      margin: 20px;
     }
 
     .gallery-item {
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 2px solid skyblue;
-      border-radius: 15px;
-      box-shadow: 0 0 15px skyblue;
-      padding: 12px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
-      width: 320px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      border: 2px solid skyblue;
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 0 15px skyblue;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+      width: 740px; /* puțin mai larg pentru imagine + padding */
     }
 
     .gallery-item:hover {
-      color: deepskyblue;
       transform: scale(1.05);
       box-shadow: 0 0 30px deepskyblue;
       background-color: rgba(255, 255, 255, 0.1);
     }
 
     .gallery-item img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
+      width: 728px;
+      height: 486px;
+      border-radius: 10px;
       transition: opacity 0.5s ease;
-      box-shadow: 0 0 10px #00bfff;
     }
 
     .gallery-item img:hover {
@@ -80,123 +66,29 @@
     }
 
     .name, .price {
-      margin-top: 10px;
-      font-size: 22px;
+      margin-top: 8px;
+      font-size: 1.2em;
       font-weight: bold;
       color: skyblue;
-      text-shadow: 0 0 8px deepskyblue;
-      user-select: none;
+      text-shadow: 0 0 10px skyblue;
     }
 
-    .price {
-      margin-top: 5px;
-      color: #00bfff;
-      text-shadow: 0 0 8px #00bfff;
-    }
-
-    /* Animație floaty pentru titlu */
     @keyframes floaty {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
-    }
-
-    /* Menu similar primei pagini (optional) */
-    .menu {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-
-    .menu a {
-      font-size: 26px;
-      font-weight: bold;
-      color: white;
-      text-decoration: none;
-      text-shadow: 0 0 10px skyblue;
-      padding: 12px 18px;
-      border: 2px solid skyblue;
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.05);
-      animation: fadeIn 1.5s ease-in forwards;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
-      user-select: none;
-    }
-
-    .menu a:hover {
-      color: deepskyblue;
-      transform: scale(1.1);
-      box-shadow: 0 0 15px skyblue;
-      background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <div id="particles-js"></div>
-
-  <div class="menu">
-    <a href="indexgifs.html">Gif</a>
-    <a href="indexpstyle.html">PstyleGif</a>
-    <a href="indexpcback.html">Pcback</a>
-    <a href="indexp.html">Combos/pack</a>
-  </div>
-
   <h1>Galerie Imagini PcBack</h1>
-
   <div id="pcback-gallery" class="gallery"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
-    // Config particule
-    particlesJS("particles-js", {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 }},
-        color: { value: "#00bfff" },
-        shape: { type: "circle" },
-        opacity: {
-          value: 0.5,
-          random: true,
-          anim: { enable: true, speed: 1, opacity_min: 0.1 }
-        },
-        size: { value: 3, random: true },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#00bfff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: "none",
-          random: false,
-          straight: false,
-          out_mode: "out"
-        }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: { enable: true, mode: "repulse" },
-          onclick: { enable: true, mode: "push" }
-        },
-        modes: {
-          repulse: { distance: 100, duration: 0.4 },
-          push: { particles_nb: 4 }
-        }
-      },
-      retina_detect: true
-    });
+    // Repository info (update here as needed)
+    const repoOwner = "sephirothcoding";
+    const repoName = "dedonew2025";
 
-    // Galerie imagini + text + preturi
     function loadImages() {
       const imageNames = [
         'pcback1.png',
@@ -206,9 +98,9 @@
       ];
 
       const gallery = document.getElementById('pcback-gallery');
-      gallery.innerHTML = '';
+      gallery.innerHTML = ''; // Golim galeria
 
-      imageNames.forEach(imageName => {
+      imageNames.forEach((imageName) => {
         const imgItem = document.createElement('div');
         imgItem.classList.add('gallery-item');
 
